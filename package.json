@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "preinstall": "npx npm-force-resolutions"
   },
   "keywords": [],
@@ -29,5 +29,8 @@
     "minimatch": "^3.0.2",
     "shelljs": "^0.8.5",
     "underscore": "^1.13.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }
