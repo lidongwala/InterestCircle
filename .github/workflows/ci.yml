@@ -25,5 +25,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
+    - name: Install npm-force-resolutions
+      run: npm install -g npm-force-resolutions
+
+    - name: Run npm-force-resolutions
+      run: npx npm-force-resolutions
+
     - name: Install dependencies
       run: npm install
