@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interest Circle</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <img src="/skate-parkteens-skate-park.jpg" alt="Promotional Image">
+        </div>
+        <div class="right-section">
+            <h1 class="slogan">
+                <span class="slogan-prefix">INTERESTCIRCLE:</span><br>
+                <span class="slogan-main">COMMUNICATE YOUR INTERESTS LIKE NEVER BEFORE.</span>
+            </h1>
+            <div id="loginForm">
+                <h2>登录</h2>
+                <input type="text" id="username" placeholder="用户名">
+                <input type="password" id="password" placeholder="密码">
+                <button onclick="login()">登录</button>
+                <p>还没有账号？ <a href="#" onclick="showRegisterForm()">注册</a></p>
+            </div>
+            <div id="registerForm" style="display: none;">
+                <h2>注册</h2>
+                <input type="text" id="regUsername" placeholder="用户名">
+                <input type="password" id="regPassword" placeholder="密码">
+                <button onclick="register()">注册</button>
+                <p>已有账号？ <a href="#" onclick="showLoginForm()">登录</a></p>
+            </div>
+        </div>
+    </div>
+    <div id="mainContent" style="display: none;">
+        <div class="header">
+            <div class="header-left">
+                <img src="/full-shot-underground-hip-hop-musicians (1).jpg" alt="Header Image">
+            </div>
+            <div class="header-right">
+                <h1 class="header-slogan">
+                    <span>INTERESTCIRCLE:</span><br>
+                    <span>COMMUNICATE YOUR INTERESTS LIKE NEVER BEFORE.</span>
+                </h1>
+                <div class="header-content">
+                    <div id="createCircle" class="create-circle">
+                        <input type="text" id="circleName" placeholder="兴趣圈名称">
+                        <textarea id="circleDescription" placeholder="兴趣圈描述"></textarea>
+                        <button onclick="createInterestCircle()">创建兴趣圈</button>
+                    </div>
+                    <div id="notificationContainer" class="notification-container">
+                        <p>没有消息</p>
+                    </div>
+                </div>   
+            </div>
+        </div>
+        <div id="circleList" class="circle-list"></div>
+    </div>
+    <div id="circleDetails" style="display: none;"></div>
+    <div id="postList"></div>
+    <div id="postDetails" style="display: none;"></div>
+    <script src="auth.js"></script>
+    <script src="circle.js"></script>
+    <script src="post.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

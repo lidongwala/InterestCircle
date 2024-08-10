@@ -93,7 +93,7 @@ function showCircleDetails(circleId) {
                         <p>描述: ${data.circle.description}</p>
                     </div>
                     <div class="active-members">
-                        <img src="../src/4016181.jpg" alt="Active Members Image" class="active-members-image">
+                        <img src="/4016181.jpg" alt="Active Members Image" class="active-members-image">
                         <div id="memberContent">
                             <h3>活跃成员</h3>
                             <div id="activeMembersList"></div>

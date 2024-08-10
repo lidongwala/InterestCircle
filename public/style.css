@@ -460,7 +460,7 @@ body {
 
 .circle-list {
     display: flex;
-    flex-direction: wrap;
+    flex-wrap: wrap;
     align-items: center;
     padding: 20px;
 }
@@ -474,8 +474,9 @@ body {
     margin: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: calc(33.333% - 20px); 
+    width: calc(33.333% - 40px);  /* 每个圈子的宽度为33.333%，减去左右的margin */
     text-align: center;
+    box-sizing: border-box; /* 包括padding和border在内的宽度计算 */
 }
 
 .circle-item h3 {

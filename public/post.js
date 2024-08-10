@@ -91,9 +91,14 @@ function goBackToPosts() {
 }
 
 function addComment() {
-    const postId = currentPostId;
+    const postId = currentPostId; // 确保 currentPostId 被正确设置
     const content = document.getElementById('commentContent').value;
     const authorId = localStorage.getItem('userId');
+    let alertCalled = false; // 添加标志位
+
+    console.log('Post ID:', postId);
+    console.log('Content:', content);
+    console.log('Author ID:', authorId);
 
     if (!content || !authorId) {
         alert('请确保填写所有必需的信息（内容和作者ID）。');
@@ -116,30 +121,37 @@ function addComment() {
             loadComments(postId); // 重新加载评论
             document.getElementById('commentContent').value = ''; // 清空输入框
         } else {
-            alert('评论失败: ' + data.message);
+            if (!alertCalled) {
+                alert('评论失败: ' + data.message);
+                alertCalled = true; // 设置标志位
+            }
         }
     })
     .catch(error => {
         console.error('错误:', error);
+        if (!alertCalled) {
+            alert('评论失败: ' + error.message);
+            alertCalled = true; // 设置标志位
+        }
     });
 }
 
 function loadComments(postId) {
-    fetch(`http://localhost:3000/api/posts/${postId}`)
-    .then(response => response.json())
-    .then(data => {
-        const commentsList = document.getElementById('commentsList');
-        commentsList.innerHTML = '';
-        data.post.comments.forEach(comment => {
-            const commentElement = document.createElement('div');
-            commentElement.className = 'comment-item';
-            commentElement.innerHTML = `
-                <small class="comment-author">作者: ${comment.author.username}</small>
-                <p class="comment-content">${comment.content}</p>
-            `;
-            commentsList.appendChild(commentElement);
+    return fetch(`http://localhost:3000/api/posts/${postId}`)
+        .then(response => response.json())
+        .then(data => {
+            const commentsList = document.getElementById('commentsList');
+            commentsList.innerHTML = '';
+            data.post.comments.forEach(comment => {
+                const commentElement = document.createElement('div');
+                commentElement.className = 'comment-item';
+                commentElement.innerHTML = `
+                    <small class="comment-author">作者: ${comment.author.username}</small>
+                    <p class="comment-content">${comment.content}</p>
+                `;
+                commentsList.appendChild(commentElement);
+            });
         });
-    });
 }
 
 function loadNotifications() {
@@ -191,4 +203,10 @@ function markAsRead(notificationId) {
 
 module.exports = {
     createPost,
+    viewPost,
+    goBackToPosts,
+    addComment, 
+    loadComments,
+    loadNotifications,
+    markAsRead
 };

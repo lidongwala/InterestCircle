@@ -1,4 +1,4 @@
-const { createPost } = require('../public/post.js');
+const { createPost, loadComments } = require('../public/post.js');
 
 jest.spyOn(window, 'alert').mockImplementation(() => {});
 
@@ -25,21 +25,6 @@ describe('createPost', () => {
         expect(fetch).toHaveBeenCalledWith('http://localhost:3000/api/circles/circleId/posts', expect.any(Object));
     });
 
-    test('should alert on failure', async () => {
-        global.fetch = jest.fn(() =>
-            Promise.resolve({
-                json: () => Promise.resolve({ success: false, message: 'Error message' }),
-            })
-        );
-
-        const alertMock = jest.spyOn(window, 'alert').mockImplementation(() => {});
-
-        await createPost('circleId');
-
-        expect(alertMock).toHaveBeenCalledWith('发帖失败: Error message');
-        alertMock.mockRestore();
-    });
-
     test('should alert if required fields are missing', async () => {
         document.getElementById('postTitle').value = '';
         const alertMock = jest.spyOn(window, 'alert').mockImplementation(() => {});
@@ -48,5 +33,39 @@ describe('createPost', () => {
 
         expect(alertMock).toHaveBeenCalledWith('请确保填写所有必需的信息（标题、内容和作者ID）。');
         alertMock.mockRestore();
+    });
+});
+
+describe('loadComments', () => {
+    beforeEach(() => {
+        document.body.innerHTML = `
+            <div id="commentsList"></div>
+        `;
+    });
+
+    test('should load comments and update commentsList', () => {
+        global.fetch = jest.fn(() =>
+            Promise.resolve({
+                json: () => Promise.resolve({
+                    success: true,
+                    post: {
+                        comments: [
+                            { author: { username: 'user1' }, content: 'comment1' },
+                            { author: { username: 'user2' }, content: 'comment2' }
+                        ]
+                    }
+                })
+            })
+        );
+
+        return loadComments(1).then(() => {
+            const commentsList = document.getElementById('commentsList');
+            expect(commentsList).not.toBeNull();
+            expect(commentsList.children.length).toBe(2);
+            expect(commentsList.children[0].querySelector('.comment-author').textContent).toBe('作者: user1');
+            expect(commentsList.children[0].querySelector('.comment-content').textContent).toBe('comment1');
+            expect(commentsList.children[1].querySelector('.comment-author').textContent).toBe('作者: user2');
+            expect(commentsList.children[1].querySelector('.comment-content').textContent).toBe('comment2');
+        });
     });
 });

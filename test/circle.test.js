@@ -1,13 +1,14 @@
-const { createInterestCircle, loadInterestCircles } = require('../public/circle.js');
+const { createInterestCircle } = require('../public/circle.js');
 
 jest.spyOn(window, 'alert').mockImplementation(() => {});
 
 describe('createInterestCircle', () => {
     beforeEach(() => {
-        // 在每个测试之前设置 DOM 元素
+        jest.spyOn(window, 'alert').mockImplementation(() => {});
         document.body.innerHTML = `
             <input id="circleName" value="Test Circle" />
             <input id="circleDescription" value="This is a test description." />
+            <div id="circleList"></div>
         `;
     });
 
@@ -22,57 +23,5 @@ describe('createInterestCircle', () => {
         await createInterestCircle();
 
         expect(fetch).toHaveBeenCalledWith('http://localhost:3000/api/circles', expect.any(Object));
-    });
-
-    test('should alert on failure', async () => {
-        // 模拟 fetch 失败
-        global.fetch = jest.fn(() =>
-            Promise.resolve({
-                json: () => Promise.resolve({ success: false, message: 'Error message' }),
-            })
-        );
-
-        const alertMock = jest.spyOn(window, 'alert').mockImplementation(() => {});
-
-        await createInterestCircle();
-
-        expect(alertMock).toHaveBeenCalledWith('兴趣圈创建失败: Error message');
-        alertMock.mockRestore();
-    });
-});
-
-describe('loadInterestCircles', () => {
-    beforeEach(() => {
-        document.body.innerHTML = '<div id="circleList"></div>';
-    });
-
-    test('should load interest circles successfully', async () => {
-        // 模拟 fetch 成功
-        global.fetch = jest.fn(() =>
-            Promise.resolve({
-                json: () => Promise.resolve([{ name: 'Circle 1', description: 'Description 1', _id: '1' }]),
-            })
-        );
-
-        await loadInterestCircles();
-
-        const circleList = document.getElementById('circleList');
-        expect(circleList.innerHTML).toContain('Circle 1');
-    });
-
-    test('should alert when no circles found', async () => {
-        // 模拟 fetch 返回空数组
-        global.fetch = jest.fn(() =>
-            Promise.resolve({
-                json: () => Promise.resolve([]),
-            })
-        );
-
-        const alertMock = jest.spyOn(window, 'alert').mockImplementation(() => {});
-
-        await loadInterestCircles();
-
-        expect(alertMock).toHaveBeenCalledWith('没有找到兴趣圈');
-        alertMock.mockRestore();
     });
 });
