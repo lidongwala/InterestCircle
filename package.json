@@ -1,26 +1,10 @@
 {
-  "name": "interestcircle",
+  "name": "alphaz",
   "version": "1.0.0",
   "main": "src/server.js",
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
     "test": "jest --config=test.config.js",
-    "start": "node src/server.js"
-  },
-  "bin": "src/server.js",
-  "pkg": {
-    "assets": [
-      "public/**/*",
-      "src/**/*"
-    ],
-    "scripts": [
-      "src/**/*.js"
-    ],
-    "targets": [
-      "node18-linux-x64",
-      "node18-macos-x64",
-      "node18-win-x64"
-    ]
+    "preinstall": "npx npm-force-resolutions"
   },
   "keywords": [],
   "author": "",
