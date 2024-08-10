@@ -37,5 +37,8 @@ jobs:
     - name: Fix vulnerabilities
       run: npm audit fix --force || true
 
+    - name: Ensure jest is executable
+      run: chmod +x ./node_modules/.bin/jest
+
     - name: Run tests
       run: npx jest --config=test.config.js
