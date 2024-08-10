@@ -34,8 +34,8 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Ensure jest is executable
-      run: npx jest --version
+    - name: Install jest
+      run: npm install jest --save-dev
 
     - name: Run tests
-      run: npm test
+      run: npx jest --config=test.config.js
