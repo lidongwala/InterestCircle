@@ -187,3 +187,7 @@ function markAsRead(notificationId) {
         console.error('错误:', error);
     });
 }
+
+module.exports = {
+    createPost,
+};

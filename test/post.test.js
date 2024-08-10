@@ -1,4 +1,6 @@
-const { createPost } = require('../public/post');
+const { createPost } = require('../public/post.js');
+
+jest.spyOn(window, 'alert').mockImplementation(() => {});
 
 describe('createPost', () => {
     beforeEach(() => {
@@ -8,6 +10,7 @@ describe('createPost', () => {
             <input id="postImage" type="file" />
         `;
         localStorage.setItem('userId', '12345'); // 模拟用户登录
+        global.showCircleDetails = jest.fn(); // 模拟 showCircleDetails 函数
     });
 
     test('should create a new post', async () => {

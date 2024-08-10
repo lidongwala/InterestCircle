@@ -268,3 +268,8 @@ function loadMorePosts(circleId, page) {
             console.error('错误:', error);
         });
 }
+
+module.exports = {
+    createInterestCircle,
+    loadInterestCircles,
+};

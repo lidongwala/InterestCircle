@@ -1,4 +1,6 @@
-const { createInterestCircle } = require('../public/circle'); // 导入要测试的函数
+const { createInterestCircle, loadInterestCircles } = require('../public/circle.js');
+
+jest.spyOn(window, 'alert').mockImplementation(() => {});
 
 describe('createInterestCircle', () => {
     beforeEach(() => {
@@ -38,8 +40,6 @@ describe('createInterestCircle', () => {
         alertMock.mockRestore();
     });
 });
-
-const { loadInterestCircles } = require('../public/circle');
 
 describe('loadInterestCircles', () => {
     beforeEach(() => {

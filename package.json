@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --config=test.config.js",
     "preinstall": "npx npm-force-resolutions"
   },
   "keywords": [],
@@ -26,11 +26,12 @@
     "sharp": "^0.33.4"
   },
   "resolutions": {
-    "minimatch": "^3.0.2",
-    "shelljs": "^0.8.5",
-    "underscore": "^1.13.0"
+    "minimatch": "3.0.2",
+    "shelljs": "0.8.5",
+    "underscore": "1.13.0"
   },
   "devDependencies": {
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
   }
 }

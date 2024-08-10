@@ -356,7 +356,7 @@ body {
     padding: 0px;
     height: auto;
     flex-wrap: wrap;
-    border-bottom: 10px solid white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .header-left {
