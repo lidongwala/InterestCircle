@@ -35,7 +35,7 @@ jobs:
       run: npm install
 
     - name: Fix vulnerabilities
-      run: npm audit fix
+      run: npm audit fix --force
 
     - name: Run tests
       run: npx jest --config=test.config.js
