@@ -42,6 +42,7 @@ function createPost(circleId) {
     })
     .catch(error => {
         console.error('错误:', error);
+        alert('发帖失败: ' + error.message);
     });
 }
 

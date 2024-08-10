@@ -43,10 +43,11 @@ describe('createInterestCircle', () => {
 
 describe('loadInterestCircles', () => {
     beforeEach(() => {
-        document.body.innerHTML = `<div id="circleList"></div>`;
+        document.body.innerHTML = '<div id="circleList"></div>';
     });
 
     test('should load interest circles successfully', async () => {
+        // 模拟 fetch 成功
         global.fetch = jest.fn(() =>
             Promise.resolve({
                 json: () => Promise.resolve([{ name: 'Circle 1', description: 'Description 1', _id: '1' }]),
@@ -60,6 +61,7 @@ describe('loadInterestCircles', () => {
     });
 
     test('should alert when no circles found', async () => {
+        // 模拟 fetch 返回空数组
         global.fetch = jest.fn(() =>
             Promise.resolve({
                 json: () => Promise.resolve([]),
